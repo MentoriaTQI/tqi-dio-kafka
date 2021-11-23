@@ -1,0 +1,61 @@
+##CONFIGS SPRING
+server:
+  port: ${PORT:8099}
+
+##APP CONFIGS
+spring:
+  application:
+    name: kafka
+
+  kafka:
+    properties:
+      specific.avro.reader: true
+      schema.registry.url: http://localhost:8082
+      bootstrap-servers: http://localhost:9092
+    producer:
+      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      group-id: tqi_dio
+    consumer:
+      key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      group-id: tqi_dio
+
+# Common Kafka Properties
+auto:
+  create:
+    topics:
+      enable: true
+
+kafka:
+  bootstrapServers: 127.0.0.1:9092
+  acksConfig: all
+  retriesConfig: 10
+  schemaRegistryUrl: "http://127.0.0.1:8082"
+
+  configs:
+    schema-registry: http://localhost:8082
+    bootstrap-servers: http://localhost:9092
+    value:
+      serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    key:
+    serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+  topics:
+    employee: employee-topic
+
+#APP
+app:
+  title: Kafka
+  version: 0.0.1
+
+##CONFIGS SPRING ACTUATOR
+management:
+  endpoints:
+    web:
+      base-path: /
+    exposure:
+      include: metrics,health
+    metrics:
+      enabled: true
+    health:
+      show-details: always
