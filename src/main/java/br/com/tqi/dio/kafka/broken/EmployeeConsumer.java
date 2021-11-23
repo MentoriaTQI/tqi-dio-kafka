@@ -17,6 +17,7 @@ public class EmployeeConsumer {
 		log.info("Headers: {}", payload.headers());
 		log.info("Partition: {}", payload.partition());
 		log.info("Let's process employee details: {}", payload.value());
+		// TODO GRAVAR NO BANCO DE DADOS
 	}
 
 }
